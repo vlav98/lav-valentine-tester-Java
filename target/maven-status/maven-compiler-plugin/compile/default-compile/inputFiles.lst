@@ -1,0 +1,13 @@
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/service/InteractiveShell.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/model/Ticket.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/service/ParkingService.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/constants/DBConstants.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/constants/ParkingType.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/util/InputReaderUtil.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/App.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/constants/Fare.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/dao/ParkingSpotDAO.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/service/FareCalculatorService.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/dao/TicketDAO.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/model/ParkingSpot.java
+/Users/valentinelav/Documents/OC-projects/P4/lav-valentine-tester-Java/src/main/java/com/parkit/parkingsystem/config/DataBaseConfig.java
