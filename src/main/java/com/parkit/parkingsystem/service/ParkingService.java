@@ -34,13 +34,13 @@ public class ParkingService {
             if(parkingSpot !=null && parkingSpot.getId() > 0){
                 String vehicleRegNumber = getVehicleRegNumber();
                 parkingSpot.setAvailable(false);
-                parkingSpotDAO.updateParking(parkingSpot);//allot this parking space and mark it's availability as false
+                parkingSpotDAO.updateParking(parkingSpot);//allot this parking space and mark its availability as false
                 if (ticketDAO.getNbTicket(vehicleRegNumber) == 0){
                     System.out.println("Welcome to our parking !");
                 }
                 Date inTime = new Date();
                 Ticket ticket = new Ticket();
-                //ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
+                //ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME
                 //ticket.setId(ticketID);
                 ticket.setParkingSpot(parkingSpot);
                 ticket.setVehicleRegNumber(vehicleRegNumber);
@@ -63,7 +63,7 @@ public class ParkingService {
     }
 
     public ParkingSpot getNextParkingNumberIfAvailable(){
-        int parkingNumber=0;
+        int parkingNumber;
         ParkingSpot parkingSpot = null;
         try{
             ParkingType parkingType = getVehicleType();
