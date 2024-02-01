@@ -25,7 +25,7 @@ public class ParkingSpotDAO {
             ps.setString(1, parkingType.toString());
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                result = rs.getInt(1);;
+                result = rs.getInt(1);
             }
             dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
@@ -56,4 +56,30 @@ public class ParkingSpotDAO {
         }
     }
 
+    public ParkingSpot getParkingSpot(int parkingSpot) {
+        Connection con = null;
+        ParkingSpot receivedParkingSpot = null;
+        try {
+            con = dataBaseConfig.getConnection();
+            PreparedStatement ps = con.prepareStatement(DBConstants.GET_PARKING_SPOT);
+            ps.setInt(1, parkingSpot);
+
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                var id = rs.getInt(1);
+
+                var parkingType = ParkingType.valueOf(rs.getString(3));
+                var avaibility = rs.getBoolean(2);
+                receivedParkingSpot = new ParkingSpot(id, parkingType, avaibility);
+            }
+            dataBaseConfig.closeResultSet(rs);
+            dataBaseConfig.closePreparedStatement(ps);
+        } catch (Exception e) {
+            logger.error("Error updating parking info", e);
+            throw new RuntimeException(e);
+        } finally {
+            dataBaseConfig.closeConnection(con);
+        }
+        return receivedParkingSpot;
+    }
 }

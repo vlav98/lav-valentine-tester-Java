@@ -59,15 +59,16 @@ public class ParkingServiceTest {
 
     @Test
     public void processExitingVehicleTest(){
+        //GIVEN
         when(ticketDAO.getNbTicket(REGISTRATION_NUMBER)).thenReturn(2);
-
         when(ticketDAO.getTicket(anyString())).thenReturn(ticket);
         when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(true);
         when(parkingSpotDAO.updateParking(any(ParkingSpot.class))).thenReturn(true);
 
+        //WHEN
+        parkingService.processExitingVehicle(new Date());
 
-        parkingService.processExitingVehicle();
-
+        //THEN
         verify(ticketDAO).getNbTicket(REGISTRATION_NUMBER);
         verify(parkingSpotDAO).updateParking(any(ParkingSpot.class));
         verify(fareCalculatorService).calculateFare(any(Ticket.class), eq(true));
@@ -90,12 +91,15 @@ public class ParkingServiceTest {
 
     @Test
     public void processExitingVehicleTestUnableUpdate() {
+        //GIVEN
         when(ticketDAO.getNbTicket(REGISTRATION_NUMBER)).thenReturn(1);
         when(ticketDAO.getTicket(anyString())).thenReturn(ticket);
         when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(false);
 
-        parkingService.processExitingVehicle();
+        //WHEN
+        parkingService.processExitingVehicle(new Date());
 
+        //THEN
         verify(ticketDAO).getNbTicket(REGISTRATION_NUMBER);
         verify(ticketDAO).getTicket(REGISTRATION_NUMBER);
         verify(ticketDAO).updateTicket(any(Ticket.class));
@@ -104,31 +108,40 @@ public class ParkingServiceTest {
 
     @Test
     public void testGetNextParkingNumberIfAvailable() {
+        // GIVEN
         when(inputReaderUtil.readSelection()).thenReturn(1);
         when(parkingSpotDAO.getNextAvailableSlot(any(ParkingType.class))).thenReturn(1);
         ParkingSpot expectedParkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
 
+        // WHEN
         ParkingSpot receivedParkingSpot = parkingService.getNextParkingNumberIfAvailable();
 
+        // THEN
         assertEquals(expectedParkingSpot, receivedParkingSpot);
     }
 
     @Test
     public void testGetNextParkingNumberIfAvailableParkingNumberNotFound() {
+        // GIVEN
         when(inputReaderUtil.readSelection()).thenReturn(1);
         when(parkingSpotDAO.getNextAvailableSlot(any(ParkingType.class))).thenReturn(-1);
 
+        //WHEN
         ParkingSpot receivedParkingSpot = parkingService.getNextParkingNumberIfAvailable();
 
+        //THEN
         assertNull(receivedParkingSpot);
     }
 
     @Test
     public void testGetNextParkingNumberIfAvailableParkingNumberWrongArgument() {
+        //GIVEN
         when(inputReaderUtil.readSelection()).thenReturn(3);
 
+        //WHEN
         ParkingSpot receivedParkingSpot = parkingService.getNextParkingNumberIfAvailable();
 
+        //THEN
         assertNull(receivedParkingSpot);
     }
 }
