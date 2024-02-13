@@ -27,8 +27,6 @@ public class ParkingSpotDAO {
             if(rs.next()){
                 result = rs.getInt(1);
             }
-            dataBaseConfig.closeResultSet(rs);
-            dataBaseConfig.closePreparedStatement(ps);
         }catch (Exception ex){
             logger.error("Error fetching next available slot",ex);
         }finally {
@@ -72,8 +70,6 @@ public class ParkingSpotDAO {
                 var avaibility = rs.getBoolean(2);
                 receivedParkingSpot = new ParkingSpot(id, parkingType, avaibility);
             }
-            dataBaseConfig.closeResultSet(rs);
-            dataBaseConfig.closePreparedStatement(ps);
         } catch (Exception e) {
             logger.error("Error updating parking info", e);
             throw new RuntimeException(e);
