@@ -59,6 +59,7 @@ public class ParkingDataBaseIT {
 
     @Test
     public void testParkingACar(){
+        // GIVEN
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO, fareCalculatorService);
 
         Ticket expectedTicket = new Ticket();
@@ -80,22 +81,26 @@ public class ParkingDataBaseIT {
 
     @Test
     public void testParkingLotExit(){
+        // GIVEN
         testParkingACar();
         Date outTime = new Date();
         outTime.setTime( System.currentTimeMillis() + (  60 * 60 * 1000) );
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO, fareCalculatorService);
+
+        // WHEN
         parkingService.processExitingVehicle(outTime);
 
+        // THEN
         var ticket = ticketDAO.getTicket(registrationNumber);
         var outDate = ticket.getOutTime();
         var farePrice = ticket.getPrice();
-
         assertNotNull(outDate);
         assertNotEquals(0, farePrice);
     }
 
     @Test
     public void testParkingLotExitRecurringUser() {
+        // GIVEN
         testParkingACar();
         Date outTime = new Date();
         outTime.setTime( System.currentTimeMillis() + (  60 * 60 * 1000) );
@@ -106,8 +111,11 @@ public class ParkingDataBaseIT {
 
         parkingService.processIncomingVehicle();
         outTime.setTime( System.currentTimeMillis() + (  60 * 60 * 1000) );
+
+        // WHEN
         parkingService.processExitingVehicle(outTime);
 
+        // THEN
         var receivedFare = ticketDAO.getTicket(registrationNumber);
         assertTrue(firstTicket.getPrice() > receivedFare.getPrice());
         assertNotEquals(receivedFare.getPrice(), firstTicket.getPrice());
